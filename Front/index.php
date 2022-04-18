@@ -56,12 +56,14 @@ $listeCategorieC=$catC->afficherCategorie();
 
 							<ul class="header__nav">
 								<li class="header__nav-item">
-									<a class="header__nav-link" href="#" role="button" id="dropdownMenu0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='none' stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M112 184l144 144 144-144'/></svg></a>
+									<a class="header__nav-link" href="index.php" role="button" id="dropdownMenu0"  aria-haspopup="true" aria-expanded="false">Home <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='none' stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M112 184l144 144 144-144'/></svg></a>
 
-									<ul class="dropdown-menu header__nav-menu" aria-labelledby="dropdownMenu0">
-										<li><a href="index.html">Home style 1</a></li>
-										<li><a href="index2.html">Home style 2</a></li>
-									</ul>
+									
+								</li>
+								<li class="header__nav-item">
+									<a class="header__nav-link" href="produits.php" role="button" id="dropdownMenu0"  aria-haspopup="true" aria-expanded="false">Produits </a>
+
+									
 								</li>
 								<li class="header__nav-item">
 									<a class="header__nav-link" href="#" role="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='none' stroke-linecap='round' stroke-linejoin='round' stroke-width='48' d='M112 184l144 144 144-144'/></svg></a>
@@ -71,7 +73,7 @@ $listeCategorieC=$catC->afficherCategorie();
 									<?php
 				foreach($listeCategorieC as $c) {
 			?>
-										<li><a href="catalog.php"style="color: white"><?= $c['nom'] ?></a></li>
+										<li><a href="produits.php"style="color: white"><?= $c['nom'] ?></a></li>
 										<?php
 				}
 			?>
@@ -152,16 +154,7 @@ $listeCategorieC=$catC->afficherCategorie();
 						<div class="header__content">
 							<form action="#" class="header__form">
 								<input type="text" class="header__input" placeholder="I'm searching for...">
-								<select class="header__select">
-									<?php
-				foreach($listeCategorieC as $c  => $value) {
-			?>
-
-									<option value='.$c->nom.' ><?= $c['nom'] ?></option>
-									<?php 
-				}?>
-								
-								</select>
+							
 								<button class="header__btn" type="button">
 									<svg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'><path d='M221.09,64A157.09,157.09,0,1,0,378.18,221.09,157.1,157.1,0,0,0,221.09,64Z' style='fill:none;stroke-miterlimit:10;stroke-width:32px'/><line x1='338.29' y1='338.29' x2='448' y2='448' style='fill:none;stroke-linecap:round;stroke-miterlimit:10;stroke-width:32px'/></svg>
 								</button>

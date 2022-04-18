@@ -1,28 +1,123 @@
-<?php
-	include '../Controller/categorieC.php';
-	$catC=new categorieC();
-	$listeCategorie=$catC->afficherCategorie(); 
-?>
 
+<?PHP
+ 
+ include "../controller/produitC.php";
+ include_once "../model/Produit.php";
+ if (isset($_GET['id'])){
+     $prodC=new produitC();
+     $p=$prodC->recupererProduit($_GET['id']);
+     
+         $id=$p['id'];
+         $nom=$p['nom'];
+         $description=$p['description'];
+         $image=$p['image'];
+         $cat=$p['cat'];
+         $prix=$p['prix'];
+         $quantite=$p['quantite'];
+ ?>
+ <script>
+function validateForm() {
+  var nom= document.forms["myForm"]["nom"].value;
+    var quantite = document.forms["myForm"]["quantite"].value;
+    var image = document.forms["myForm"]["image"].value;
+     var prix = document.forms["myForm"]["prix"].value;
 
+  if (nom == "") {
+    alert("nom vide");
+    return false;
+  }
+  if (nom.length<3) {
 
+alert("nom min 3 Caractéres");
+return false;
+}
+ 
+    if (quantite == "") {
+    alert("quantite vide");
+    return false;
+  }
+  if (prix == "") {
+    alert("prix vide");
+    return false;
+  }
+    
+    
+    
+    
+  
+   
+      if (image == "") {
+
+    alert("image vide");
+    return false;
+  }
+
+ 
+    
+}
+</script>
 <!doctype html>
 <html lang="en">
 
     
-<!-- Mirrored from themesdesign.in/dason-django/layouts/default/ecommerce-shops.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 03 Apr 2022 20:27:26 GMT -->
+<!-- Mirrored from themesdesign.in/dason-django/layouts/default/ecommerce-add-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 03 Apr 2022 20:27:29 GMT -->
 <head>
         
+        <!-- bootstrap 5.x or 4.x is supported. You can also use the bootstrap css 3.3.x versions -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" crossorigin="anonymous">
+ 
+ <!-- default icons used in the plugin are from Bootstrap 5.x icon library (which can be enabled by loading CSS below) -->
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.min.css" crossorigin="anonymous">
+  
+ <!-- alternatively you can use the font awesome icon library if using with `fas` theme (or Bootstrap 4.x) by uncommenting below. -->
+ <!-- link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" crossorigin="anonymous" -->
+  
+ <!-- the fileinput plugin styling CSS file -->
+ <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.5/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+  
+ <!-- if using RTL (Right-To-Left) orientation, load the RTL CSS file after fileinput.css by uncommenting below -->
+ <!-- link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.5/css/fileinput-rtl.min.css" media="all" rel="stylesheet" type="text/css" /-->
+  
+ <!-- the jQuery Library -->
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+  
+ <!-- piexif.min.js is needed for auto orienting image files OR when restoring exif data in resized images and when you
+     wish to resize images before upload. This must be loaded before fileinput.min.js -->
+ <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.5/js/plugins/piexif.min.js" type="text/javascript"></script>
+  
+ <!-- sortable.min.js is only needed if you wish to sort / rearrange files in initial preview. 
+     This must be loaded before fileinput.min.js -->
+ <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.5/js/plugins/sortable.min.js" type="text/javascript"></script>
+  
+ <!-- bootstrap.bundle.min.js below is needed if you wish to zoom and preview file content in a detail modal
+     dialog. bootstrap 5.x or 4.x is supported. You can also use the bootstrap js 3.3.x versions. -->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+  
+ <!-- the main fileinput plugin script JS file -->
+ <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.5/js/fileinput.min.js"></script>
+  
+ <!-- following theme script is needed to use the Font Awesome 5.x theme (`fas`). Uncomment if needed. -->
+ <!-- script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.5/themes/fas/theme.min.js"></script -->
+  
+ <!-- optionally if you need translation for your language then include the locale file as mentioned below (replace LANG.js with your language locale) -->
+ <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.2.5/js/locales/LANG.js"></script>
+
+
+
+
         <meta charset="utf-8" />
-        <title>Categorie </title>
+        <title>Modifier Produits </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
         <!-- App favicon -->
         <link rel="shortcut icon" href="assets/images/favicon.ico">
-        
-          <!-- plugin css -->
-          <link href="assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+
+        <!-- select2 css -->
+        <link href="assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+
+        <!-- dropzone css -->
+        <link href="assets/libs/dropzone/min/dropzone.min.css" rel="stylesheet" type="text/css" />
 
         <!-- preloader css -->
         <link rel="stylesheet" href="assets/css/preloader.min.css" type="text/css" />
@@ -50,11 +145,11 @@
                         <!-- LOGO -->
                         <div class="navbar-brand-box">
                             <a href="index.html" class="logo logo-dark">
-                                <span class="logo-sm">
-                                    <img src="assets/images/logo.png" alt="" height="30">
+                                <span class="logo">
+                                    <img src="assets/images/logo.png" alt="" height="">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="assets/images/logo.png" alt=""  width="70"> 
+                                    <img src="assets/images/logo-sm.svg" alt="" height="24"> 
                                 </span>
                             </a>
                             <style>
@@ -64,13 +159,12 @@
                                   margin-right: auto;
                                 }
                                 </style>
-
                             <a href="index.html" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <img src="assets/images/logo.png" alt="" height="50">
+                                    <img src="assets/images/logo.png" alt="" height="50" width="50">
                                 </span>
-                                <span class="logo-lg">
-                                    <img src="assets/images/logo.png" alt=""  width="70" class="center"> 
+                                <span class="logo-lg" >
+                                    <img src="assets/images/logo.png" alt=""  width="70"  class="center"> 
                                 </span>
                             </a>
                         </div>
@@ -346,13 +440,12 @@
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="ecommerce-categories.php" key="t-products"> Categories</a></li>
-                                    <li><a href="ecommerce-products.php" key="t-products"> Produits</a></li>                                
-                                    <li><a href="ecommerce-orders.html" data-key="t-orders">Orders</a></li>
+                                    <li><a href="ecommerce-products.php" key="t-products"> Produits</a></li>
+                                   <li><a href="ecommerce-orders.html" data-key="t-orders">Orders</a></li>
                                     <li><a href="ecommerce-customers.html" data-key="t-customers">Customers</a></li>
                                     <li><a href="ecommerce-cart.html" data-key="t-cart">Cart</a></li>
                                     <li><a href="ecommerce-checkout.html" data-key="t-checkout">Checkout</a></li>
                                     <li><a href="ecommerce-shops.html" data-key="t-shops">Shops</a></li>
-                                   
                                 </ul>
                             </li>
 
@@ -609,12 +702,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">Categories</h4>
+                                    <h4 class="mb-sm-0 font-size-18">Modifier Produit</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
-                                            <li class="breadcrumb-item active">Categories</li>
+                                            <li class="breadcrumb-item active">Modifier Produit</li>
                                         </ol>
                                     </div>
 
@@ -622,94 +715,96 @@
                             </div>
                         </div>
                         <!-- end page title -->
-<style>
-    .wrapper {
-    text-align: right;
-}
 
-.button {
-    position: absolute;
-    top: 50%;
-}
-</style>
-                        <div class="row">
-                        <div class="wrapper">
-
-                        <button  class="btn btn-primary" class="button"><a href="ecommerce-add-categorie.php" style="color: white">Ajouter Categorie</a></button>
-                        </div>
-                        <br><br> <br>
-
-                            <div class="col-xl-15">
-                                    
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="table-responsive">
-
-                                        
-                                            <table class="table table-centered align-middle table-nowrap table-hover mb-0">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Id Categorie</th>
-                                                        <th scope="col">Nom Categorie</th>
-                                                        <th scope="col">Actions</th>
-
-                                                      
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                <?php
-				                                foreach($listeCategorie as $c){
-			                                    ?>
-                                                    <tr>
-
-                                                    <td>
-                                                        <h5 class="font-size-15">
-                                                            <?php echo $c['id']; ?>
-                                                        </h5>                                                       
-                                                     </td>
-                                                        <td>
-                                                            <h5 class="font-size-15">
-                                                            <?php echo $c['nom']; ?>
-                                                        </h5>                                                       
-                                                     </td>
-
-
-                                                       
-                                                      
-                                                        <td>
-                                                    <button type="submit" class="btn btn-primary waves-effect waves-light"><a  href="ecommerce-modify-categorie.php?id=<?php echo $c['id']; ?>" style="color: white" >Modifier </a></button>
-                                                    <button type="button" class="btn btn-secondary waves-effect waves-light"><a  href="ecommerce-supp-categories.php?id=<?php echo $c['id']; ?>" style="color: white" >Supprimer </a></button>
-                                                    
-                                                </td>
-                                                    </tr>
-                                                   <?php
-                                                } ?> 
-
-                                                   
-
-                                                  
-
-                                                    
-                                                </tbody>
-                                            </table>
-                                        </div>
-    
-                                    </div>
-                                </div>
-                            </div>
-
-                          
-                            <!-- end col -->
-                        </div>
-                        <!-- END ROW -->
-
-                        
                         <div class="row">
                             <div class="col-12">
-                                <div class="text-center my-3">
-                                    <a href="javascript:void(0);" class="text-success"><i class="bx bx-loader bx-spin font-size-18 align-middle me-2"></i> Load more </a>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Information génerale</h4>
+                                        <p class="card-title-desc">Remplir tous les champs</p>
+                                    </div>
+                                    <div class="card-body">
+                                        <form onsubmit="return validateForm()" name="myForm" method="POST" >
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                <div class="mb-3">
+                                                        <input  value="<?PHP echo $id ?>" name="id" type="text" class="form-control" hidden>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label >Nom de produit</label>
+                                                        <input value="<?PHP echo $nom ?>" name="nom" type="text" class="form-control">
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label >Quantite</label>
+                                                        <input  value="<?PHP echo $quantite ?>"name="quantite" type="number" class="form-control">
+                                                    </div>
+                                                  
+                                                    <div class="mb-3">
+                                                        <label >Prix</label>
+                                                        <input value="<?PHP echo $prix ?>" name="prix" type="number" class="form-control">
+                                                    </div>
+                                                </div>
+        
+                                                <div class="col-sm-6">
+                                                <?PHP
+                                                 $produitC=new produitC();
+                                                $listeCat=$produitC->RecupCategories();
+                                                ?>
+                                                    <div class="mb-3">
+                                                        <label class="control-label">Categorie</label>
+                                                        <select selected="selected" name="cat" class="form-control select2" >
+
+                                                        <?PHP
+                                                        foreach($listeCat as $p){
+	                                                    ?>
+                                                        <option><?PHP echo $p['nom']; ?> </option>
+                                                        <?PHP } ?>
+                                                        </select>
+                                                    </div>
+                                                
+                                                    <div class="mb-3">
+                                                        <label >Description de produit</label>
+                                                        <textarea  class="form-control" name="description"  rows="5"><?PHP echo $description ?></textarea>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+
+
+
+                                                            <br>
+
+
+
+                                            <div class="form-group">
+                                            <input   name="image" id="image" type="file"  value="<?PHP echo $image ?>"class="file" data-browse-on-zone-click="true">
+                                            </div>
+                                            <br>
+        
+                                            <div class="d-flex flex-wrap gap-2">
+
+                                            <button type="submit" class="btn btn-primary waves-effect waves-light" name="modifier" value="Update" >Enregistrer</button>
+                                            <button type="button" class="btn btn-secondary waves-effect waves-light"><a href="ecommerce-products.php" style="color: white">Annuler</a></button>                                        </div>
+                                    </div>
+                                        </form>
+                                        <?PHP
+	
+}
+if (isset($_POST['modifier'])){
+	$Produit=new Produit($_POST['id'],$_POST['nom'],$_POST['description'],$_POST['image'],$_POST['cat'],$_POST['prix'],$_POST['quantite']);
+	$prodC->modifierProduit($Produit,$_POST['id']);
+	echo $_POST['id'];
+    echo ("<script> window.location.replace(\"ecommerce-products.php\")</script>");
+
+}
+?>
+        
+                                    </div>
                                 </div>
-                            </div> <!-- end col-->
+
+                              
+                            
+                            </div>
                         </div>
                         <!-- end row -->
                         
@@ -887,15 +982,18 @@
         <!-- pace js -->
         <script src="assets/libs/pace-js/pace.min.js"></script>
 
-        <!-- Plugins js-->
-        <script src="assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
-        <script src="assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
+        <!-- select 2 plugin -->
+        <script src="assets/libs/select2/js/select2.min.js"></script>
 
-        <script src="assets/js/pages/ecommerce-shop.init.js"></script>
+        <!-- dropzone plugin -->
+        <script src="assets/libs/dropzone/min/dropzone.min.js"></script>
+
+        <!-- init js -->
+        <script src="assets/js/pages/ecommerce-select2.init.js"></script>
 
         <script src="assets/js/app.js"></script>
 
     </body>
 
-<!-- Mirrored from themesdesign.in/dason-django/layouts/default/ecommerce-shops.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 03 Apr 2022 20:27:29 GMT -->
+<!-- Mirrored from themesdesign.in/dason-django/layouts/default/ecommerce-add-product.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 03 Apr 2022 20:27:29 GMT -->
 </html>

@@ -1,11 +1,9 @@
-<?php
-	include '../Controller/categorieC.php';
-	$catC=new categorieC();
-	$listeCategorie=$catC->afficherCategorie(); 
+<?PHP
+include "../Controller/produitC.php";
+$produitC=new produitC();
+$listeProduit=$produitC->afficherProduit();
+
 ?>
-
-
-
 <!doctype html>
 <html lang="en">
 
@@ -14,7 +12,7 @@
 <head>
         
         <meta charset="utf-8" />
-        <title>Categorie </title>
+        <title>Produits </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
@@ -67,7 +65,7 @@
 
                             <a href="index.html" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <img src="assets/images/logo.png" alt="" height="50">
+                                    <img src="assets/images/logo.png" alt="" height="30">
                                 </span>
                                 <span class="logo-lg">
                                     <img src="assets/images/logo.png" alt=""  width="70" class="center"> 
@@ -346,7 +344,7 @@
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                 <li><a href="ecommerce-categories.php" key="t-products"> Categories</a></li>
-                                    <li><a href="ecommerce-products.php" key="t-products"> Produits</a></li>                                
+                                    <li><a href="ecommerce-products.php" key="t-products"> Produits</a></li>                               
                                     <li><a href="ecommerce-orders.html" data-key="t-orders">Orders</a></li>
                                     <li><a href="ecommerce-customers.html" data-key="t-customers">Customers</a></li>
                                     <li><a href="ecommerce-cart.html" data-key="t-cart">Cart</a></li>
@@ -609,12 +607,12 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">Categories</h4>
+                                    <h4 class="mb-sm-0 font-size-18">Produits</h4>
 
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
                                             <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
-                                            <li class="breadcrumb-item active">Categories</li>
+                                            <li class="breadcrumb-item active"> Produits</li>
                                         </ol>
                                     </div>
 
@@ -622,7 +620,7 @@
                             </div>
                         </div>
                         <!-- end page title -->
-<style>
+                        <style>
     .wrapper {
     text-align: right;
 }
@@ -635,61 +633,51 @@
                         <div class="row">
                         <div class="wrapper">
 
-                        <button  class="btn btn-primary" class="button"><a href="ecommerce-add-categorie.php" style="color: white">Ajouter Categorie</a></button>
-                        </div>
-                        <br><br> <br>
-
+<button  class="btn btn-primary" class="button"><a href="ecommerce-add-product.php" style="color: white">Ajouter Produits</a></button>
+</div>
+<br><br> <br>
                             <div class="col-xl-15">
-                                    
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="table-responsive">
-
-                                        
                                             <table class="table table-centered align-middle table-nowrap table-hover mb-0">
                                                 <thead>
                                                     <tr>
-                                                        <th scope="col">Id Categorie</th>
-                                                        <th scope="col">Nom Categorie</th>
+                                                        <th scope="col">Image</th>
+                                                        <th scope="col">Nom</th>
+                                                        <th scope="col">Categories</th>
+                                                        <th scope="col">Quantite</th>
+                                                        <th scope="col">Prix</th>
                                                         <th scope="col">Actions</th>
-
-                                                      
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                <?php
-				                                foreach($listeCategorie as $c){
-			                                    ?>
+                                                <?PHP
+                                    foreach($listeProduit as $P){
+	                                    ?>
                                                     <tr>
-
-                                                    <td>
-                                                        <h5 class="font-size-15">
-                                                            <?php echo $c['id']; ?>
-                                                        </h5>                                                       
-                                                     </td>
                                                         <td>
-                                                            <h5 class="font-size-15">
-                                                            <?php echo $c['nom']; ?>
-                                                        </h5>                                                       
-                                                     </td>
-
-
-                                                       
-                                                      
+                                                            <img src="uploads/<?PHP echo $P['image']?>" alt="" class="avatar-md p-1">
+                                                        </td>
                                                         <td>
-                                                    <button type="submit" class="btn btn-primary waves-effect waves-light"><a  href="ecommerce-modify-categorie.php?id=<?php echo $c['id']; ?>" style="color: white" >Modifier </a></button>
-                                                    <button type="button" class="btn btn-secondary waves-effect waves-light"><a  href="ecommerce-supp-categories.php?id=<?php echo $c['id']; ?>" style="color: white" >Supprimer </a></button>
-                                                    
-                                                </td>
+                                                           <h5 class="font-size-15"> <?PHP echo $P['nom']; ?></h5>
+                                                           <p class="text-muted mb-0">
+                                                            <i class="mdi mdi-account me-1"></i> Chiheb Ben Abdelkader
+                                                        </p>
+                                                        </td>
+                                                        <td><?PHP echo $P['cat']; ?></td>
+                                                        <td><?PHP echo $P['quantite']; ?></td>
+                                                        <td>
+                                                        <?PHP echo $P['prix']; ?> Dinars </td>
+                                                        <td>
+                                                        <button type="submit" class="btn btn-primary waves-effect waves-light"><a href="ecommerce-modify-product.php?id=<?php echo $P['id']; ?>"style="color: white" >Modifier </a></button>
+                                                        <button type="button" class="btn btn-secondary waves-effect waves-light"><a  href="ecommerce-supp-products.php?id=<?php echo $P['id']; ?>" style="color: white" >Supprimer </a></button>                                    </td>
                                                     </tr>
-                                                   <?php
-                                                } ?> 
-
-                                                   
-
-                                                  
 
                                                     
+                                                    <?PHP
+}
+?>
                                                 </tbody>
                                             </table>
                                         </div>

@@ -362,9 +362,8 @@
                                     <span data-key="t-ecommerce">Ecommerce</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="ecommerce-categories.php" key="t-products">Afficher Categories</a></li>
-                                    <li><a href="ecommerce-add-product.html" data-key="t-add-product">Ajouter Produits</a></li>
-                                    <li><a href="ecommerce-products.html" key="t-products">Afficher Produits</a></li>
+                                <li><a href="ecommerce-categories.php" key="t-products"> Categories</a></li>
+                                    <li><a href="ecommerce-products.php" key="t-products"> Produits</a></li>
                                     <li><a href="ecommerce-orders.html" data-key="t-orders">Orders</a></li>
                                     <li><a href="ecommerce-customers.html" data-key="t-customers">Customers</a></li>
                                     <li><a href="ecommerce-cart.html" data-key="t-cart">Cart</a></li>
@@ -664,7 +663,7 @@
                                                
                                             </div>
                                             <div class="d-flex flex-wrap gap-2">
-                                                <button type="submit" class="btn btn-primary waves-effect waves-light"  name="submit">Enregistrer</button>
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light"  value="enregistrer" name="submit">Enregistrer</button>
                                                 <button type="button" class="btn btn-secondary waves-effect waves-light"><a href="ecommerce-categories.php" style="color: white">Annuler</a></button>
                                             </div>
         

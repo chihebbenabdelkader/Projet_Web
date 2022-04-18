@@ -1,6 +1,6 @@
 <?php
-include_once '../config.php';
-include '../Model/Produit.php';
+include_once 'config.php';
+include 'Model/Produit.php';
 
 
 class produitC {
