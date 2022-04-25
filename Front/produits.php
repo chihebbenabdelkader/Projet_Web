@@ -12,6 +12,13 @@ include "Controller/produitC.php";
 $produitC=new produitC();
 $listeProduit=$produitC->afficherProduit();
 
+if(empty($_POST['search'])==false){
+	$x=$_POST['search'];
+	   $listeProduit=$produitC->rechercherProduit($x);}
+   
+	   else
+   $listeProduit=$produitC->afficherProduit();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,6 +41,8 @@ $listeProduit=$produitC->afficherProduit();
 	<!-- Favicons -->
 	<link rel="icon" type="image/png" href="icon/favicon-32x32.png" sizes="32x32">
 	<link rel="apple-touch-icon" href="icon/favicon-32x32.png">
+
+	<link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
 
 	<meta name="description" content="Digital marketplace HTML Template by Dmitry Volkov">
 	<meta name="keywords" content="">
@@ -234,27 +243,44 @@ $listeProduit=$produitC->afficherProduit();
 
 								<div class="collapse filter-wrap__content" id="collapseFilter">
 									<!-- filter -->
+								
 									<div class="filter">
 										<h4 class="filter__title">Filters <button type="button">Clear all</button></h4>
-
+										
+										<form method="POST" action="produits.php">
 										<div class="filter__group">
-											<label class="filter__label">Keyword:</label>
-											<input type="text" class="filter__input" placeholder="Keyword">
+											<label class="filter__label">Rechercher Produits</label>
+											<input type="text" name="search" class="filter__input" placeholder="Rechercher">
+											
 										</div>
-
+										
+										</form>
+			</br>
+			<?PHP
+                                                 $produitC=new produitC();
+                                                $listeCat=$produitC->RecupCategories();
+                                                ?>
+												<form method="post" action=""> 
 										<div class="filter__group">
-											<label for="sort" class="filter__label">Sort by:</label>
+											<label for="sort" class="filter__label">Search by category:</label>
 
 											<div class="filter__select-wrap">
-												<select name="sort" id="sort" class="filter__select">
-													<option value="0">Relevance</option>
-													<option value="1">Newest</option>
-													<option value="2">Oldest</option>
+												<select selected="selected" name="sort" id="sort" class="filter__select">
+												<option>Select Category</option>
+
+												<?PHP
+                                                        foreach($listeCat as $c){
+	                                                    ?>
+	                                                    <option value="<?PHP echo $id ?>"> <?PHP echo $c['nom']; ?> </option>
+	                                                    <?PHP } ?>
 												</select>
 											</div>
 										</div>
+										
+														</form>
+														<br>
 
-										<div class="filter__group">
+									<!--	<div class="filter__group">
 											<label class="filter__label">Price:</label>
 
 											<div class="filter__range">
@@ -335,7 +361,7 @@ $listeProduit=$produitC->afficherProduit();
 
 										<div class="filter__group">
 											<button class="filter__btn" type="button">APPLY FILTER</button>
-										</div>
+										</div>  -->
 									</div>
 									<!-- end filter -->
 								</div>
@@ -346,6 +372,7 @@ $listeProduit=$produitC->afficherProduit();
 				<!-- end filter wrap -->
 
 				<!-- content wrap -->
+				
 				<div class="col-12 col-lg-80">
 					<div class="row">
 						<!-- card -->
@@ -383,7 +410,7 @@ $listeProduit=$produitC->afficherProduit();
 
 
 						<!-- paginator -->
-						<div class="col-12">
+					<!--	<div class="col-12">
 							<div class="paginator">
 
 
@@ -404,6 +431,7 @@ $listeProduit=$produitC->afficherProduit();
 								</ul>
 							</div>
 						</div>
+								-->
 						<!-- end paginator -->
 					</div>
 				</div>
@@ -478,7 +506,9 @@ $listeProduit=$produitC->afficherProduit();
 						</div>
 					</div>
 				</div>
-
+<script>
+	$("#sort").chosen();
+</script>
 				<div class="col-12">
 					<div class="footer__wrap">
 						<a class="footer__logo" href="index.php">
@@ -503,6 +533,11 @@ $listeProduit=$produitC->afficherProduit();
 	<script src="js/jquery.mousewheel.min.js"></script>
 	<script src="js/jquery.mCustomScrollbar.min.js"></script>
 	<script src="js/main.js"></script>
+	<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+  <script> $(document).ready(function() {
+    $('div.datatableid').DataTable();
+} ); </script>
 </body>
 
 <!-- Mirrored from dmitryvolkov.me/demo/gogame1.3/catalog.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 02 Apr 2022 11:21:58 GMT -->

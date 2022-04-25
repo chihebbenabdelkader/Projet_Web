@@ -4,6 +4,8 @@ $produitC=new produitC();
 $listeProduit=$produitC->afficherProduit();
 
 ?>
+
+
 <!doctype html>
 <html lang="en">
 
@@ -32,8 +34,10 @@ $listeProduit=$produitC->afficherProduit();
         <!-- App Css-->
         <link href="assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
 
+        <link href="pagination/css/pagination.css" rel="stylesheet" type="text/css" />
+<link href="https://cdn.datatables.net/1.11.5/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     </head>
-
+   
     <body data-topbar="dark">
 
     <!-- <body data-layout="horizontal"> -->
@@ -634,13 +638,16 @@ $listeProduit=$produitC->afficherProduit();
                         <div class="wrapper">
 
 <button  class="btn btn-primary" class="button"><a href="ecommerce-add-product.php" style="color: white">Ajouter Produits</a></button>
+<button  class="btn btn-primary" class="button"><a href="stat.php" style="color: white">Statistiques </a></button>
+<button  class="btn btn-primary" class="button"><a href="pdf.php" style="color: white">PDF </a></button>
+
 </div>
 <br><br> <br>
                             <div class="col-xl-15">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="table-responsive">
-                                            <table class="table table-centered align-middle table-nowrap table-hover mb-0">
+                                            <table  id="datatableid" class="table table-centered align-middle table-nowrap table-hover mb-0">
                                                 <thead>
                                                     <tr>
                                                         <th scope="col">Image</th>
@@ -882,6 +889,18 @@ $listeProduit=$produitC->afficherProduit();
         <script src="assets/js/pages/ecommerce-shop.init.js"></script>
 
         <script src="assets/js/app.js"></script>
+
+          <!-- Page level plugin JavaScript-->
+  <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.11.5/js/dataTables.bootstrap4.min.js"></script>
+  <script> $(document).ready(function() {
+    $('#datatableid').DataTable(
+        {
+        "pageLength": 5,
+        "bLengthChange": false
+        }
+    );
+} ); </script>
 
     </body>
 

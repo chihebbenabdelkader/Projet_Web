@@ -103,7 +103,26 @@ function recupererProduit($id){
 }
 
 
+function afficherProd($idC){
 
+
+        
+    try{
+        $pdo = config::getConnexion();
+        $query=$pdo->prepare(
+            'SELECT * FROM produit where cat=:id'
+            
+        );
+        $query->execute([
+            'id' => $idC
+        ]);
+        
+        return $query->fetchAll();
+    }
+    catch(PDOException $e){
+         $e->getMeesage();
+    }
+}
 function RecupCategories()
 	{
 		//$sql="SElECT * From employe e inner join formationphp.employe a on e.cin= a.cin";
@@ -118,6 +137,35 @@ function RecupCategories()
         }	
 	}
 
+    function rechercherProduit($HI){
+		$sql="SELECT * from produit where nom LIKE '%$HI%' or prix LIKE '%$HI%'  ";
+		$db = config::getConnexion();
+		try{
+		    $sth = $db->prepare($sql);
+			$sth->execute();
+			$liste = $sth->fetchAll();
+			return $liste;
+		}
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }
+	}
+
+
+    function recupererCategorie($id){
+        $sql="SELECT * from categorie where id=$id";
+        $db = config::getConnexion();
+        try{
+            $query=$db->prepare($sql);
+            $query->execute();
+    
+            $categorie=$query->fetch();
+            return $categorie;
+        }
+        catch (Exception $e){
+            die('Erreur: '.$e->getMessage());
+        }
+    }
 }
 
 
