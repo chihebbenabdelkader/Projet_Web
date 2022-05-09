@@ -1,0 +1,61 @@
+.supp_bt
+{
+    border-radius: 8%;
+    background-color: rgb(199, 73, 73);
+    margin-top: 25px;
+    padding-top: 9%;
+    padding-bottom: 9%;
+    padding-left: 10%;
+    padding-right:10%;
+
+}
+.modif_bt
+
+{    border-radius: 8%;
+    background-color: rgb(79, 140, 189);
+    margin-top: 25px;
+    padding-top: 9%;
+    padding-bottom: 9%;
+    padding-left:8%;
+    padding-right:8%;
+   
+}
+
+.abs
+{display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+   
+    border: 1px solid rgba(167,130,233,0.06);
+    border-radius: 6px;
+
+}
+
+.coln
+{
+
+font-size: medium;
+color: cornflowerblue;
+
+}
+
+.imprimer{
+font-size: larger;
+color: blue;
+
+
+
+}
+.bb{
+background-color: rgb(146, 174, 232);
+padding-top: -10%;
+padding-bottom:-10%;
+
+border-radius: 6px;
+margin-left: 9%;
+margin-right: 83%;
+
+
+}
